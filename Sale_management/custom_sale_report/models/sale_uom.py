@@ -10,8 +10,13 @@ class SaleUom(models.Model):
     name = fields.Char(string="Nom", required=True)
     code = fields.Char(string="Symbole")
     
+    @api.model
     def create(self, vals):
         result = super(SaleUom, self).create(vals)
+        return result
+    
+    def write(self, vals):
+        result = super(SaleUom, self).write(vals)
         return result
     
     def unlink(self):
