@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
         <xpath expr="//field[@name='order_line']/tree/field[last()]" position="after">
-                <button name='duplicate_line' type='object' class="fa fa-files-o"/>
+            <button name='duplicate_line' type='object' icon="fa-folder-open-o"/>
         </xpath>
         </field>
     </record>
