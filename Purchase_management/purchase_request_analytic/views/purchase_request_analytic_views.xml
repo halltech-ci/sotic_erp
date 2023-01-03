@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="purchase_request_sale.purchase_request_form_inherit"/>
         <field name="arch" type="xml">
             <xpath expr="//sheet//group/group/field[@name='sale_order']" position="after">
-                <field name="account_analytic_id1" attrs="{'invisible':[('is_for_project', '=', True)], 'readonly': [('is_editable','=', False)],}"  options="{'no_create':True}"/>
+                <field name="account_analytic_id1" attrs="{'invisible':'readonly': [('is_editable','=', False)],}"  options="{'no_create':True}"/>
             </xpath>
         </field>
     </record>
