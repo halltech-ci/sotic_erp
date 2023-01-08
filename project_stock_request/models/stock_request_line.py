@@ -2,6 +2,14 @@
 
 from odoo import models, fields, api, _
 
+REQUEST_STATES = [
+    ("draft", "Draft"),
+    ("to_approve", "To Approve"),
+    ("open", "In progress"),
+    ("done", "Done"),
+    ('close', 'Closed'),
+    ("cancel", "Cancelled"),
+]
 
 class StockRequestLine(models.Model):
     _name = "stock.request.line"
