@@ -13,7 +13,7 @@ class PurchaseRequest(models.Model):
     picking_type_id = fields.Many2one(required=False)
     is_for_project = fields.Boolean(string="Imputer au projet", default=True)
     requested_by = fields.Many2one('res.users', string="Demandeur DA", readonly=True)
-    date_required = fields.Date(string="Request Date", track_visibility="onchange", default=lambda self:self._default_date_required())
+    date_required = fields.Date(string="Request Date", tracking=True, default=lambda self:self._default_date_required())
     date_approve = fields.Date(string="Date Approve")
     
     
