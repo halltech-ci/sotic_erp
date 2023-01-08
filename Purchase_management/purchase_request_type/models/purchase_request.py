@@ -31,5 +31,21 @@ class PurchaseRequest(models.Model):
                 req.is_project_approver = True
             else:
                 req.is_project_approver = False
+                
+    def button_approved(self):
+        self.to_approve_check()
+        if self.project and not self.is_project_approver:
+            raise UserError(
+                    _("Vous n'êtes pas autorisé à valider cette DA")
+                )
+        return self.write({"state": "approved", "date_approve": date.today()})
+    
+    def to_approve_check(self):
+        user = self.env.user
+        if not user.has_group('purchase_request_type.group_purchase_request_approver'):
+            raise UserError(
+                    _("Vous n'êtes pas autorisé à valider cette DA")
+                )
+    
     
     
