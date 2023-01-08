@@ -21,7 +21,7 @@ class StockRequestLine(models.Model):
     stock_request_id = fields.Many2one('stock.request', string="Product Request")
     product_id = fields.Many2one("product.product", string="Product", domain=[("purchase_ok", "=", True)], tracking=True,)
     product_uom_id = fields.Many2one("uom.uom", string="Product Unit of Measure", tracking=True, related='product_id.uom_id')
-    requested_by = fields.Many2one("res.users", related="request_id.requested_by", string="Requested by", store=True,)
+    requested_by = fields.Many2one("res.users", related="stock_request_id.requested_by", string="Requested by", store=True,)
     initial_qty = fields.Float('Initial Qty', digits="Product Unit of Measure")#Quantity in sale order
     product_uom_qty = fields.Float('Product Qty', digits="Product Unit of Measure")#Quantity as for workorder
     qty_done = fields.Float('Qty Done', digits="Product Unit of Measure", compute='_compute_qty_done',)#Quantity give by stock
