@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class PurchaseRequest(models.Model):
@@ -14,7 +14,6 @@ class PurchaseRequest(models.Model):
     
     name = fields.Char(string="Request Reference", required=True, default='/', index=True, readonly=True)
     request_date = fields.Datetime(string="Request date", help="Date when the user initiated the request.", default=fields.Datetime.now, tracking=True, readonly=True)
-    
     
 
 class PurchaseRequestLine(models.Model):
