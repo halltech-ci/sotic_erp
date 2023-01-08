@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError, ValidationError
+from datetime import date, datetime, timedelta
 
 class PurchaseRequest(models.Model):
     _inherit= 'purchase.request'
+    
+    
+    @api.model
+    def _default_date_required(self):
+        req_date = date.today() + timedelta(days=7)
+        return req_date
     
     
     purchase_type = fields.Selection(selection=[('project', 'Matières/Consommables'), ('travaux', 'Travaux'), ('transport', 'Transport'), ('subcontract', 'Sous Traitance'), ('stock', 'Appro'),], string="Type Achat")
