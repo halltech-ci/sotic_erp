@@ -17,7 +17,7 @@ class StockRequestLine(models.Model):
     
     
     name = fields.Char(string="Description")
-    request_state = fields.Selection(selection=REQUEST_STATE, string='Status', readonly=True, copy=False, default='draft', required=True, help='Expense Report State', related="stock_request_id.state",)
+    request_state = fields.Selection(selection=REQUEST_STATES, string='Status', readonly=True, copy=False, default='draft', required=True, help='Expense Report State',)
     stock_request_id = fields.Many2one('stock.request', string="Product Request")
     product_id = fields.Many2one("product.product", string="Product", domain=[("purchase_ok", "=", True)], tracking=True,)
     product_uom_id = fields.Many2one("uom.uom", string="Product Unit of Measure", tracking=True, related='product_id.uom_id')
