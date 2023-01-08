@@ -14,6 +14,7 @@ REQUEST_STATES = [
 class StockRequestLine(models.Model):
     _name = "stock.request.line"
     _description = "Manage stock request line"
+    _inherit = ["mail.thread", "mail.activity.mixin"]
     
     
     name = fields.Char(string="Description")
@@ -31,7 +32,7 @@ class StockRequestLine(models.Model):
     #analytic_account_id = fields.Many2one(comodel_name="account.analytic.account", string="Analytic Account", track_visibility="onchange",)
     #product_request_allocation_ids = fields.One2many("product.request.allocation", "product_request_line_id", string="Product Request Allocation",)
     task_id = fields.Many2one('project.task', string='Project Task', required=True, ondelete='cascade')
-    project_id = fields.Many2one('project.project', related="request_id.project_id")
+    project_id = fields.Many2one('project.project', related="project_request_id.project_id")
     #manage product_requestpicking
     #move_ids = fields.One2many('stock.move', 'product_line_id', string='Reservation', readonly=True, ondelete='set null', copy=False)
     
