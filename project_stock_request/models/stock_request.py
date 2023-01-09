@@ -35,3 +35,34 @@ class StockRequestOrder(models.Model):
     #sale_order = fields.Many2one('sale.order', string="Devis")
     line_ids = fields.One2many('stock.request.line', 'stock_request_id', string="Products")
     partner_id = fields.Many2one('res.partner', related="project_id.partner_id", store=True)
+    
+    
+    
+    def button_to_approve(self):
+        for line in self.line_ids:
+            line.action_to_approve()
+        return self.write({"state": "to_approve"})
+    
+    def set_to_draft(self):
+        if self.state in ['done', 'close']:
+            raise ValidationError(_("Vous ne pouvez pas reinitialiser un OT déja traité"))
+        for line in self.line_ids:
+            line.set_to_draft()
+        self.write({'state': 'draft'})
+           
+    def button_approve(self):
+        for line in self.line_ids:
+            line.action_approve()
+        self.write({"state": "open", 'date_approve': fields.Datetime.now()})
+        return True
+    
+    def action_confirm(self):
+        if not self.button_approve():
+            raise ValidationError(_("You must approve this request before"))
+        if len(self.picking_ids) > 0:
+            raise ValidationError(_("You can not confirm request that is already confirm"))
+        #self._create_picking()
+        return True
+    
+    
+    

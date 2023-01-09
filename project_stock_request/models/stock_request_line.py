@@ -36,3 +36,19 @@ class StockRequestLine(models.Model):
     #manage product_requestpicking
     #move_ids = fields.One2many('stock.move', 'product_line_id', string='Reservation', readonly=True, ondelete='set null', copy=False)
     
+    def action_to_approve(self):
+        self.request_state = "to_approve"
+    
+    def action_approve(self):
+        self.request_state = "open"
+    
+    def action_done(self):
+        self.request_state = "done"
+    
+    def set_to_draft(self):
+        self.request_state = 'draft'
+        
+    def action_close(self):
+        self.request_state = 'close'
+    
+    
