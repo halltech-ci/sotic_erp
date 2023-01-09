@@ -29,6 +29,8 @@
         'views/templates.xml',
         'views/project_stock_request_views.xml',
         'views/project_stock_request_menu.xml',
+        'data/stock_picking_data.xml',
+        'data/stock_request_sequence.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
