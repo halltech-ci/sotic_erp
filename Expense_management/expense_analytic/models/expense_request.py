@@ -10,7 +10,7 @@ class ExpenseRequest(models.Model):
     
     def create_bank_statement(self):
         res = super(ExpenseRequest, self).create_bank_statement()
-        return res    
+        return res
     
     
 class ExpenseLine(models.Model):
@@ -37,5 +37,5 @@ class ExpenseLine(models.Model):
     
     def _get_statement_line(self):
         vals = super(ExpenseLine, self)._get_statement_line()
-        vals['analytic_account'] = self.analytic_account.id
+        vals['analytic_account_id'] = self.analytic_account.id
         return vals
