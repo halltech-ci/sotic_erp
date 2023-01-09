@@ -12,5 +12,5 @@ class AccountBankStatementLine(models.Model):
     
     def _create_debit_line(self):
         vals = super(AccountBankStatementLine, self)._create_debit_line()
-        vals['analytic_account_id'] = self.analytic_account_id
+        vals['analytic_account_id'] = self.analytic_account_id.id
         return vals
