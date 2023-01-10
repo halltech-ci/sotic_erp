@@ -3,6 +3,7 @@
 from odoo import models, fields, api, _
 from num2words import num2words
 from odoo.addons import decimal_precision as dp
+from odoo.exceptions import UserError, ValidationError
 
 
 class PurchaseOrder(models.Model):
@@ -84,6 +85,11 @@ class PurchaseOrder(models.Model):
                 order.write({'state': 'to approve'})
             #order.write({'name':self.env['ir.sequence'].next_by_code('purchase.bc.sequence')})
         return True
+    
+    def unlink(self):
+        if self.state not in ('draft'):
+            raise ValidationError(_("Vous ne pouvez pas supprimer une demande de cotation ou un bon de commande"))
+        super(PurchaseOrder, self).unlink()
     
     
 class PurchaseOrderLine(models.Model):
