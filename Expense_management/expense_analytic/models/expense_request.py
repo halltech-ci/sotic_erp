@@ -30,7 +30,7 @@ class ExpenseLine(models.Model):
         return res
     
     
-    analytic_account = fields.Many2one('account.analytic.account', string='Analytic Account', dpmain=lambda self:self._get_analytic_domain())
+    analytic_account = fields.Many2one('account.analytic.account', string='Analytic Account', domain=lambda self:self._get_analytic_domain())
     project = fields.Many2one('project.project', string='Project', domain=lambda self: self._get_project_domain())
     expense_type = fields.Boolean(string="Imputer au projet", default=True)
     
