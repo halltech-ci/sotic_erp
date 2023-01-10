@@ -15,7 +15,7 @@ class PurchaseRequestLine(models.Model):
     _inherit = "purchase.request.line"
     
     project = fields.Many2one('project.project', string="Project", readonly=True, related="request_id.project")
-    product_code = fields.Char(related="product_id.default_code", sting="Code Article", store=True)
+    product_code = fields.Char(related="product_id.default_code", string="Code Article", store=True)
     project_id = fields.Many2one('project.project', compute="_compute_project_id", store=True,)
     
     @api.depends('project')
