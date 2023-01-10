@@ -46,6 +46,12 @@ class PurchaseRequest(models.Model):
             raise UserError(
                     _("Vous n'êtes pas autorisé à valider cette DA")
                 )
+            
+class PurchaseRequestLine(models.Model):
+    _inherit = 'purchase.request.line'
+    
+    
+    purchase_type = fields.Selection(selection=[('project', 'Matières/Consommables'), ('travaux', 'Travaux'), ('transport', 'Transport'), ('subcontract', 'Sous Traitance'), ('stock', 'Appro'),], related='request_id.purchase_type', store=True)
     
     
     
