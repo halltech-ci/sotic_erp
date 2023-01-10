@@ -58,7 +58,7 @@ class PurchaseOrder(models.Model):
             seq_date = None
             if 'date_order' in vals:
                 seq_date = fields.Datetime.context_timestamp(self, fields.Datetime.to_datetime(vals['date_order']))
-            vals['name'] = self.env['ir.sequence'].with_context(force_company=company_id).next_by_code('purchase.dc.sequence', sequence_date=seq_date) or '/'
+            vals['name'] = self.env['ir.sequence'].with_context(with_company=company_id).next_by_code('purchase.dc.sequence', sequence_date=seq_date) or '/'
             
         return super(PurchaseOrder, self).create(vals)
     
