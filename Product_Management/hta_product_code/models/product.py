@@ -74,8 +74,8 @@ class ProductTemplate(models.Model):
     @api.depends('categ_id.category_code')
     def _compute_prefix_code(self):
         for product in self:
-            if product.category_id.category_code:
-                product.code_prefix = product.category_id.category_code
+            if product.categ_id.category_code:
+                product.code_prefix = product.categ_id.category_code
                               
 
     def is_automask(self):
