@@ -37,10 +37,8 @@ def sanitize_reference_mask(product, mask):
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    code_prefix = fields.Char(
-        string="Reference Prefix",
-        help="Add prefix to product variant reference (default code)",
-    )
+    code_prefix = fields.Char(string="Reference Prefix", help="Add prefix to product variant reference (default code)", compute="_compute_prefix_code", store=True)
+    
     reference_mask = fields.Char(
         string="Variant reference mask",
         copy=False,
@@ -72,6 +70,13 @@ class ProductTemplate(models.Model):
     variant_default_code_error = fields.Text(
         compute="_compute_variant_default_code_error"
     )
+    
+    @api.depends('categ_id.category_code')
+    def _compute_prefix_code(self):
+        for product in self:
+            if product.categ_id.category_code:
+                product.code_prefix = product.categ_id.category_code
+                              
 
     def is_automask(self):
         return bool(

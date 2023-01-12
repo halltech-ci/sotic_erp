@@ -32,6 +32,7 @@
         "views/res_config_settings_views.xml",
         'views/product_views.xml',
         'views/product_attribute_views.xml',
+        'views/product_category_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
