@@ -51,7 +51,7 @@ class PurchaseOrder(models.Model):
         if self.state == 'approve':
             self.purchase_approver = self.user_id
     
-    @api.model
+    """@api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
             company_id = vals.get("company_id", self.env.company.id)
@@ -61,7 +61,7 @@ class PurchaseOrder(models.Model):
             vals['name'] = self.env['ir.sequence'].with_context(with_company=company_id).next_by_code('purchase.dc.sequence', sequence_date=seq_date) or '/'
             
         return super(PurchaseOrder, self).create(vals)
-    
+    """
     def create_order(self):
         for order in self:
             order.write({'name':self.env['ir.sequence'].next_by_code('purchase.bc.sequence')})
